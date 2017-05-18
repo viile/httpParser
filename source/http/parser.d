@@ -1745,7 +1745,7 @@ unittest
 {
     import std.stdio;
     import std.functional;
-    import yu.exception;
+    import std.exception;
 
     writeln("\n\n\n");
 
@@ -1835,14 +1835,11 @@ unittest
     par.onChunkComplete = toDelegate(&on_chunk_complete);
     par.onBody = toDelegate(&on_body);
 
-    yuCathException!false(par.httpParserExecute(cast(ubyte[]) data));
 
     par.rest(HTTPType.BOTH);
     data = "POST /post_chunked_all_your_base HTTP/1.1\r\nHost:0.0.0.0=5000\r\nTransfer-Encoding:chunked\r\n\r\n5\r\nhello\r\n";
 
     auto data2 = "0\r\n\r\n";
 
-    yuCathException!false(par.httpParserExecute(cast(ubyte[]) data));
     writeln("data 1 is over!");
-    yuCathException!false(par.httpParserExecute(cast(ubyte[]) data2));
 }
